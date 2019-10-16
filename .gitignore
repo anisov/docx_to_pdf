@@ -1,0 +1,14 @@
+
+.idea/
+
+*.pdf
+
+*.docx
+
+logs/
+
+config/nginx.conf
+
+docker-compose.yml
+
+code/__pycache__/

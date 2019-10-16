@@ -1,0 +1,17 @@
+upstream converter_balancer {
+    server converter1:7777;
+    server converter2:7777;
+    server converter3:7777;
+    server converter4:7777;
+    server converter5:7777;
+}
+
+server {
+	listen 80;
+	location / {
+	    proxy_pass http://converter_balancer;
+            proxy_read_timeout 90;
+	}
+        client_body_buffer_size     75M;
+        client_max_body_size        75M;
+}

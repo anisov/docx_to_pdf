@@ -1,0 +1,60 @@
+version: "3.5"
+services:
+  converter1:
+    build:
+      context: .
+    restart: on-failure
+    networks:
+      converter-net:
+    volumes:
+      - ./logs:/code/logs
+  converter2:
+    build:
+      context: .
+    restart: on-failure
+    networks:
+      converter-net:
+    volumes:
+      - ./logs:/code/logs
+  converter3:
+    build:
+      context: .
+    restart: on-failure
+    networks:
+      converter-net:
+    volumes:
+      - ./logs:/code/logs
+  converter4:
+    build:
+      context: .
+    restart: on-failure
+    networks:
+      converter-net:
+    volumes:
+      - ./logs:/code/logs
+  converter5:
+    build:
+      context: .
+    restart: on-failure
+    networks:
+      converter-net:
+    volumes:
+      - ./logs:/code/logs
+  balancer:
+    image: "nginx:1.17.4"
+    ports:
+      - "7777:80"
+    depends_on:
+        - converter1
+        - converter2
+        - converter3
+        - converter4
+        - converter5
+    restart: on-failure
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      converter-net:
+
+networks:
+  converter-net:
